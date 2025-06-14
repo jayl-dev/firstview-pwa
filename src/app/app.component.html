@@ -1,11 +1,29 @@
-<h1>Test</h1>
-<button (click)="testStudentTrips()">Get Student Trips (Today)</button>
-<button (click)="testLiveVehicleLocations()">Get LIVE Vehicle Locations</button>
-<button (click)="clearResponse()">Clear</button>
+<!-- app.component.html -->
+<app-map
+  [trips]="tripsResponse"
+  [locations]="locationsResponse"
+></app-map>
 
-<div *ngIf="error" style="color: red; margin-top: 1em;">
-  {{ error }}
+<div class="button-container">
+  <button class="action-button" (click)="testLiveVehicleLocations()">Load</button>
+  <button class="action-button" (click)="toggleResponse()">
+    {{ showResponse ? 'Hide' : 'Show' }}
+  </button>
+  <button class="action-button" (click)="toggleAutoApiCall()">
+    {{ isAutoApiCallEnabled ? 'Stop' : 'Auto' }}
+  </button>
 </div>
-<div *ngIf="apiResponse" style="margin-top: 1em;">
-  <pre>{{ apiResponse | json }}</pre>
+
+<div *ngIf="isLoading" class="loading-indicator">
+  Loading...
+</div>
+
+<div *ngIf="error" class="error-message">{{ error }}</div>
+
+<div
+  *ngIf="showResponse && (tripsResponse || locationsResponse)"
+  class="response-container"
+>
+  <pre>{{ tripsResponse | json }}</pre>
+  <pre>{{ locationsResponse | json }}</pre>
 </div>

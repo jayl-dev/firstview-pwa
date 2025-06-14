@@ -60,8 +60,10 @@ export class FirstView10ApiService {
 
   private buildHeaders(token: string | null): HttpHeaders {
     let headers = new HttpHeaders({
-      'User-Agent': 'angular-http-client',
-      'app-client-platform': 'web'
+      'Accept':'application/json',
+      'User-Agent':'okhttp/4.9.2',
+      'app-client-platform':'android',
+      'app-client-build':'455'
     });
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
